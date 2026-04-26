@@ -5,10 +5,12 @@ import { styles } from './create-account';
 import { TextInput, View, Button, Pressable } from 'react-native';
 import { saveToken } from '@/helpers/authStorage';
 import apiClient from '@/helpers/axios';
+import { Redirect, useRouter } from 'expo-router';
 
 const Login = () => {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
+	const router = useRouter();
 
 	const LoginAction = async () => {
 		console.log(username, password)
@@ -17,6 +19,7 @@ const Login = () => {
 		console.log({res: res.data})
 
 		await saveToken(token)
+		router.replace('/')
 	}
 
 	return (
